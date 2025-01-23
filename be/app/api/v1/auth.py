@@ -5,6 +5,9 @@ from sqlalchemy.future import select
 
 from app.db.session import get_db
 from app.models.documents import DocumentModel
+from app.core.config import settings
+from app.tasks.uae_site_tasks import download_mohre_docs
+
 
 router = APIRouter(
     prefix="/v1/auth",
@@ -14,9 +17,10 @@ router = APIRouter(
 
 @router.get("/login", summary="Login", description="Endpoint for login")
 async def login(db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(DocumentModel))
-    documents = result.scalars().all()
-    for i in documents:
-        print(i.id, i.text)
-
+    download_mohre_docs.delay()
     return {"message": "Login"}
+
+
+@router.get("/logout")
+async def logout():
+    pass
