@@ -20,6 +20,29 @@ class GeneralResponseSchema(BaseModel, Generic[T]):
         )
 
 
+class PaginateResponseSchema(GeneralResponseSchema, Generic[T]):
+    total: int
+    page: int
+    limit: int
+
+    @staticmethod
+    def format(
+        message: str,
+        data: Optional[T] = None,
+        total: int = 0,
+        page: int = 1,
+        limit: int = 10,
+    ):
+        return PaginateResponseSchema(
+            uuid=str(uuid.uuid4()),
+            messsage=message,
+            data=data,
+            total=total,
+            page=page,
+            limit=limit,
+        )
+
+
 class ValidationErrorResponseSchema(BaseModel):
     uuid: str = Field(description="Unique identifier for the response")
     message: str = Field(description="Error message")
