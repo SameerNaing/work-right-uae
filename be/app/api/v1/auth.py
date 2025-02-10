@@ -1,12 +1,16 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
 
 from app.db.session import get_db
-from app.models.documents import DocumentModel
 from app.core.config import settings
-from app.tasks.uae_site_tasks import download_mohre_docs
+from app.schemas.v1.base import GeneralResponseSchema, ValidationErrorResponseSchema
+from app.schemas.v1.auth import (
+    LoginRequestSchema,
+    LoginResponseSchema,
+    SendOtpReqSchema,
+)
 
 
 router = APIRouter(
@@ -15,12 +19,30 @@ router = APIRouter(
 )
 
 
-@router.get("/login", summary="Login", description="Endpoint for login")
-async def login(db: AsyncSession = Depends(get_db)):
-    download_mohre_docs.delay()
-    return {"message": "Login"}
+@router.post(
+    "/login",
+    summary="Login",
+    response_model=GeneralResponseSchema[LoginResponseSchema],
+    responses={422: {"model": ValidationErrorResponseSchema}},
+)
+async def login(body: LoginRequestSchema):
+    raise HTTPException(status_code=401, detail="Invalid email or password")
+    # return GeneralResponseSchema.format(
+    #     message="Login Successful",
+    #     data=LoginResponseSchema(
+    #         access_token="token",
+    #         refresh_token="refresh_token",
+    #     ),
+    # )
 
 
-@router.get("/logout")
-async def logout():
-    pass
+@router.post(
+    "/send-otp",
+    summary="Send Email OTP",
+    status_code=201,
+    response_model=GeneralResponseSchema[None],
+    responses={422: {"model": ValidationErrorResponseSchema}},
+)
+async def send_otp(body: SendOtpReqSchema):
+    raise Exception("HELLO WORLD")
+    return GeneralResponseSchema.format("OTP Sent Successfully")

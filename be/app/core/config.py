@@ -16,7 +16,11 @@ class Settings(BaseSettings):
     FIRECRAWL_API_KEY: str = ""
     CHROMA_HOST: str = "localhost"
     CHROMA_PORT: int = 8000
-    MOHRE_DOC_CHROMA_COLLECTION = "mohre"
+    MOHRE_DOC_CHROMA_COLLECTION: str = "mohre"
+    MAILER_USER: str
+    MAILER_PASSWORD: str
+    MAILER_HOST: str
+    MAILER_PORT: int
 
     class Config:
         env_file = ".env"

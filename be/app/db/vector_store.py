@@ -19,4 +19,4 @@ def get_vector_store(collection_name: str):
         nodes=[], storage_context=storage_context, embed_model=embed_model
     )
 
-    return collection, index
+    return collection, index, vec_store
