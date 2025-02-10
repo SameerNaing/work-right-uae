@@ -26,14 +26,13 @@ router = APIRouter(
     responses={422: {"model": ValidationErrorResponseSchema}},
 )
 async def login(body: LoginRequestSchema):
-    raise HTTPException(status_code=401, detail="Invalid email or password")
-    # return GeneralResponseSchema.format(
-    #     message="Login Successful",
-    #     data=LoginResponseSchema(
-    #         access_token="token",
-    #         refresh_token="refresh_token",
-    #     ),
-    # )
+    return GeneralResponseSchema.format(
+        message="Login Successful",
+        data=LoginResponseSchema(
+            access_token="token",
+            refresh_token="refresh_token",
+        ),
+    )
 
 
 @router.post(
@@ -44,5 +43,4 @@ async def login(body: LoginRequestSchema):
     responses={422: {"model": ValidationErrorResponseSchema}},
 )
 async def send_otp(body: SendOtpReqSchema):
-    raise Exception("HELLO WORLD")
     return GeneralResponseSchema.format("OTP Sent Successfully")
