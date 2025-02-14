@@ -10,7 +10,7 @@ router = APIRouter(
 )
 
 
-@router.get("/chat", response_class=StreamingResponse)
+@router.post("", response_class=StreamingResponse)
 async def chat():
     return StreamingResponse(
         mohre_agent.chat("Hello My name is Naing Ye Oo, how are you ?"),

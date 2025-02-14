@@ -12,8 +12,7 @@ from app.core.config import settings
 
 # DB Models
 from app.db.session import Base
-from app.models.documents import DocumentModel
-
+from app.models.user import UserModel
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

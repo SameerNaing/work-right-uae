@@ -9,10 +9,18 @@ class LoginResponseSchema(BaseModel):
 class LoginRequestSchema(BaseModel):
     email: EmailStr
     otp: str
+    otp_request_id: str
 
     @field_validator("otp")
     @classmethod
     def validate_otp(cls, v):
         if not v:
             raise ValueError("Otp should have at least 1 character")
+        return v
+
+    @field_validator("otp_request_id")
+    @classmethod
+    def validate_otp_request_id(cls, v):
+        if not v:
+            raise ValueError("otp_request_id is required")
         return v

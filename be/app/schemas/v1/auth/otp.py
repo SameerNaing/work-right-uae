@@ -1,5 +1,9 @@
 from pydantic import BaseModel, EmailStr
 
 
-class SendOtpReqSchema(BaseModel):
+class RequestOtpReqSchema(BaseModel):
     email: EmailStr
+
+
+class RequestOtpResSchema(BaseModel):
+    otp_request_id: str

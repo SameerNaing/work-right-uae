@@ -27,3 +27,11 @@ def download_files(urls, filenames, destination_folder, allow_exts=None):
 
 def delete_folder(folder):
     shutil.rmtree(folder)
+
+
+def get_username_from_email(email):
+    username = email.split("@")[0]
+    if "." in username:
+        username = username.split(".")[0]
+
+    return username

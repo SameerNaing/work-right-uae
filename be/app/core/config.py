@@ -21,6 +21,11 @@ class Settings(BaseSettings):
     MAILER_PASSWORD: str
     MAILER_HOST: str
     MAILER_PORT: int
+    JWT_SECRET: str = '$EcR3t'
+    JWT_ACCESS_TOKEN_EXPIRE_DAYS: int = 30
+    REFRESH_TOKEN_EXPIRE_DAYS: int = 40
+    JWT_ALGORITHM: str = "HS256"
+    
 
     class Config:
         env_file = ".env"
