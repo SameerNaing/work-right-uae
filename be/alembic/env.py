@@ -11,7 +11,7 @@ from alembic import context
 from app.core.config import settings
 
 # DB Models
-from app.db.session import Base
+from app.core.db import Base
 from app.models.user import UserModel
 
 # this is the Alembic Config object, which provides

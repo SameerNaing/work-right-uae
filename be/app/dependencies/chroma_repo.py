@@ -1,4 +1,4 @@
-from app.db.vector_store import get_vector_store
+from app.core.vector_store import get_vector_store
 from app.repositories.chroma_repository import ChromaRepository
 
 

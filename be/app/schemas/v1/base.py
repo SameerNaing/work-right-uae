@@ -68,8 +68,11 @@ class ValidationErrorResponseSchema(BaseModel):
     @staticmethod
     def format(errors):
         validation = {}
-        print(errors)
         for error in errors:
+            if len(error["loc"]) == 1:
+                validation["payload"] = "Payload is required"
+                continue
+
             field = error["loc"][1]
             validation[field] = ValidationErrorResponseSchema.format_error_msg(
                 error["msg"]

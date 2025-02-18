@@ -1,3 +1,4 @@
+import uuid
 import random
 import string
 import datetime
@@ -25,16 +26,17 @@ def create_access_token(data: JwtPayloadSchema):
     )
 
 
-def decode_token(token: str, throw_error=True):
+def decode_token(token: str):
     try:
         data = jwt.decode(
-            token, settings.JWT_SECRET, algorithms=[settings.JWT_ALGORITHM]
+            token,
+            settings.JWT_SECRET,
+            algorithms=[settings.JWT_ALGORITHM],
         )
         return JwtPayloadSchema(**data)
     except:
-        if throw_error:
-            raise InvalidTokenError("Invalid Token")
-        return None
+        print("error")
+        raise InvalidTokenError("Invalid Token")
 
 
 def generate_otp(length=6):

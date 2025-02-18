@@ -34,4 +34,4 @@ def get_username_from_email(email):
     if "." in username:
         username = username.split(".")[0]
 
-    return username
+    return username.capitalize()

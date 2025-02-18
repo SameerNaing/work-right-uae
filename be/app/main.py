@@ -22,11 +22,6 @@ from app.core.redis import get_redis_client
 from app.core.config import settings
 
 
-oauth2_scheme = APIKeyHeader(
-    name="Authorization", auto_error=False, description='Put "Bearer <token>"'
-)
-
-
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     app.state.redis = await get_redis_client()
@@ -53,6 +48,5 @@ app.include_router(profile_router)
 
 
 @app.get("/")
-async def root(token: str = Depends(oauth2_scheme)):
-    print(token)
-    return {"message": "BE is up and running!"}
+async def root():
+    return {"message": "Server is running..."}

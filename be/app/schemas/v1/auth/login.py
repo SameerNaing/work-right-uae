@@ -22,5 +22,5 @@ class LoginRequestSchema(BaseModel):
     @classmethod
     def validate_otp_request_id(cls, v):
         if not v:
-            raise ValueError("otp_request_id is required")
+            raise ValueError("Otp request Id is required")
         return v

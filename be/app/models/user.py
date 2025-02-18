@@ -1,5 +1,5 @@
 from sqlalchemy import Column, String, Text, CHAR
-
+from sqlalchemy.orm import relationship
 
 from .base import BaseModel
 

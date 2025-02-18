@@ -4,7 +4,7 @@ from llama_index.core import ServiceContext
 from llama_index.core.agent import ReActAgent
 
 
-from app.db.vector_store import get_chroma_client
+from app.core.vector_store import get_chroma_client
 from app.core.config import llm
 
 
