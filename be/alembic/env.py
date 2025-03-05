@@ -13,6 +13,8 @@ from app.core.config import settings
 # DB Models
 from app.core.db import Base
 from app.models.user import UserModel
+from app.models.chat.chats import ChatsModel
+from app.models.chat.messages import MessagesModel
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.utils import encryption, comm_func
 from app.repositories.user_repository import UserRepository
-from app.tasks.emails import send_email
+from app.tasks.notifications import send_email
 from app.core.config import settings
 from app.schemas.v1.auth import JwtPayloadSchema
 

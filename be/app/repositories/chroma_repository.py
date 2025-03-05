@@ -10,7 +10,7 @@ class ChromaRepository:
     def add_node_to_collection(self, nodes):
         self.index.insert_nodes(nodes=nodes)
 
-    def add_document_to_collection(self, document: str):
+    def add_document_to_collection(self, document):
         self.index.insert(document=document)
 
     def query_documents_by_metadata(self, metadata_filter: dict) -> list:

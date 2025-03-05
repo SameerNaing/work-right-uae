@@ -16,10 +16,6 @@ from app.schemas.v1.auth import (
 )
 from app.schemas.v1.base import GeneralResponseSchema
 
-oauth2_scheme = APIKeyHeader(
-    name="Authorization", auto_error=False, description='Put "Bearer <token>"'
-)
-
 
 router = APIRouter(
     prefix="/v1/profile",

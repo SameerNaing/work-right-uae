@@ -24,14 +24,19 @@ class PaginateResponseSchema(GeneralResponseSchema, Generic[T]):
     total: int
     page: int
     limit: int
+    total_pages: int
+    current_page: int
+    data: Optional[T] = []
 
     @staticmethod
     def format(
         message: str,
-        data: Optional[T] = None,
+        data: Optional[T] = [],
         total: int = 0,
         page: int = 1,
         limit: int = 10,
+        total_pages: int = 0,
+        current_page: int = 1,
     ):
         return PaginateResponseSchema(
             uuid=str(uuid.uuid4()),
@@ -40,6 +45,8 @@ class PaginateResponseSchema(GeneralResponseSchema, Generic[T]):
             total=total,
             page=page,
             limit=limit,
+            total_pages=total_pages,
+            current_page=current_page,
         )
 
 
@@ -68,7 +75,9 @@ class ValidationErrorResponseSchema(BaseModel):
     @staticmethod
     def format(errors):
         validation = {}
+        print("ERROR", errors)
         for error in errors:
+
             if len(error["loc"]) == 1:
                 validation["payload"] = "Payload is required"
                 continue
