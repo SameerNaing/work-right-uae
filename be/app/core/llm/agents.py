@@ -8,7 +8,7 @@ from llama_index.core.agent import ReActAgent
 from llama_index.storage.chat_store.redis import RedisChatStore
 
 
-from app.core.config import embed_model, llm, settings
+from app.core.config import embed_model, llm, settings, mohre_llm
 from app.core import constants
 from app.core.vector_store import get_vector_store
 from app.core.llm import tools
@@ -81,7 +81,7 @@ class MOHREAgent:
 
         agent = ReActAgent.from_tools(
             tools=agent_tools,
-            llm=llm,
+            llm=mohre_llm,
             context=self._context_prompt(),
             memory=chat_memory,
             verbose=True,

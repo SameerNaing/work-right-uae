@@ -1,7 +1,11 @@
+import torch
 from pydantic_settings import BaseSettings
 from firecrawl import FirecrawlApp
+
 from llama_index.llms.ollama import Ollama
 from llama_index.embeddings.ollama import OllamaEmbedding
+from llama_index.llms.huggingface import HuggingFaceLLM
+from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig 
 
 
 class Settings(BaseSettings):
@@ -39,5 +43,30 @@ firecrawl_app = FirecrawlApp(
 embed_model = OllamaEmbedding(
     base_url=settings.LLM_URL, model_name=settings.EMBED_MODEL
 )
+
+model_path = "app/core/models/llm-model"
+
+quantization_config = BitsAndBytesConfig(
+   load_in_4bit=True,
+   bnb_4bit_quant_type="nf4",
+   bnb_4bit_use_double_quant=True,
+   bnb_4bit_compute_dtype=torch.float16
+)
+tokenizer = AutoTokenizer.from_pretrained(
+    model_path
+)
+
+model = AutoModelForCausalLM.from_pretrained(
+    model_path,
+    device_map="auto",
+
+    quantization_config=quantization_config
+)
+
+print(model)
+
+
+
+mohre_llm = HuggingFaceLLM(model=model, tokenizer=tokenizer, is_chat_model=True)
 
 llm = Ollama(base_url=settings.LLM_URL, model=settings.LLM_MODEL, request_timeout=10000)

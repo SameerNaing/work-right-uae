@@ -13,6 +13,11 @@ def get_user_chats(query: str, user_id: str, chat_id: str):
         "chat_id",
         chat_id,
     )
+
+    assert type(query) != str, "Query must be a string"
+    assert type(user_id) != str, "User ID must be a string"
+    assert type(chat_id) != str, "Chat ID must be a string"
+
     try:
         chroma_repo = get_chroma_repository(chat_history_chroma_collection)
         metadata_filters = MetadataFilters(
