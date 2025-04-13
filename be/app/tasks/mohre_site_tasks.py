@@ -96,7 +96,7 @@ def get_mohre_services(self):
         chroma_repo.delete_document_by_metadata(
             DocumentMetadata.to_filter_dict(source_url=constants.MOHRE_SERVICES_URL)
         )
-
+ 
         for url in urls:
             data = firecrawl_app.scrape_url(url, params={"formats": ["markdown"]})
             metadata = DocumentMetadata(

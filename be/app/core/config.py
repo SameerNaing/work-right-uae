@@ -67,6 +67,6 @@ print(model)
 
 
 
-mohre_llm = HuggingFaceLLM(model=model, tokenizer=tokenizer, is_chat_model=True)
+mohre_llm = HuggingFaceLLM(model=model, tokenizer=tokenizer, is_chat_model=True, local_files_only=True)
 
 llm = Ollama(base_url=settings.LLM_URL, model=settings.LLM_MODEL, request_timeout=10000)
